@@ -11,7 +11,6 @@ import {
 //components
 import Favourites from './Favourites.js'
 import Search from './Search.js'
-import Home from './Home.js'
 
 export default function Header(props){
     return(
@@ -29,7 +28,7 @@ export default function Header(props){
             </Navbar>
             <Switch>
                 <Route path="/">
-                    <Home />
+                    <Search />
                 </Route>
                 <Route path="/search">
                     <Search />
