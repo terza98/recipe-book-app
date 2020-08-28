@@ -46,6 +46,10 @@
     margin: 0 auto;
 }
 #search{width: 100%;}
+.list-group-item{cursor: pointer;}
 .list-group-item:hover{
     background: #d0d0d0;
+}
+.searchItem{
+    cursor: pointer;
 }

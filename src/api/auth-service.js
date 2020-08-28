@@ -1,6 +1,6 @@
 import 'dotenv/config.js';
 const axios = require('axios');
-const accessToken = '3dc2ceeb2f754dcfb6bb000ebaddcd9e';
+const accessToken = process.env.REACT_APP_API_KEY;
 const API_URL = process.env.REACT_APP_API_URL;
 const config = {
     headers: { 
@@ -11,10 +11,10 @@ const config = {
 
 class Service{
     searchRecipes(query){
-        return axios.get(API_URL + `search?query=${query}&apiKey=${accessToken}`, config);
+        return axios.get(API_URL + `recipes/complexSearch?query=${query}&apiKey=${accessToken}`, config);
     }
     autoCompleteSearch(query){
-        return axios.get(API_URL + `autocomplete?number=10&query=${query}&apiKey=${accessToken}`, config);
+        return axios.get(API_URL + `recipes/autocomplete?number=10&query=${query}&apiKey=${accessToken}`, config);
     }
 
     
