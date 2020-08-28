@@ -41,3 +41,11 @@
     color:#fff;
     margin-left: 5px;
 }
+#autocomplete-list{
+    width: 50%;
+    margin: 0 auto;
+}
+#search{width: 100%;}
+.list-group-item:hover{
+    background: #d0d0d0;
+}
