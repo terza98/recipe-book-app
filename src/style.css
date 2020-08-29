@@ -39,7 +39,7 @@
 
 #responsive-navbar-nav a{
     color:#fff;
-    margin-left: 5px;
+    margin-left: 10px;
 }
 #autocomplete-list{
     width: 50%;
@@ -50,6 +50,14 @@
 .list-group-item:hover{
     background: #d0d0d0;
 }
-.searchItem{
+.searchItem > h3, .searchItem > img, .searchItem .favourite-star{
     cursor: pointer;
 }
+.favourite-star, .favourite-star-yellow{
+  right:0;
+  position: absolute;
+}
+.favourite-star-yellow{
+  color: orange;
+}
+img{width:100%;}
