@@ -53,10 +53,7 @@
 .searchItem > h3, .searchItem > img, .searchItem .favourite-star{
     cursor: pointer;
 }
-.favourite-star, .favourite-star-yellow{
-  right:0;
-  position: absolute;
-}
+
 .favourite-star-yellow{
   color: orange;
 }

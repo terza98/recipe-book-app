@@ -41,6 +41,13 @@ export default function SearchResult(props) {
 		// Push the new data onto the array
 		if (!isCurrentFavourite(item.id)) {
 			a.push(item);
+			// Re-serialize the array back into a string and store it in localStorage
+			localStorage.setItem('favourites', JSON.stringify(a));
+			setFavourites(a);
+		} else {
+			for (let i = 0; i < a.length; i++) {
+				if (a[i].id === item.id) a.splice(i, 1);
+			}
 			console.log(a);
 			// Re-serialize the array back into a string and store it in localStorage
 			localStorage.setItem('favourites', JSON.stringify(a));
@@ -101,24 +108,28 @@ export default function SearchResult(props) {
 									xs={12}
 									md={4}
 								>
-									<FontAwesomeIcon
-										className="favourite-star"
-										icon={
-											isCurrentFavourite(item.id)
-												? faStarFill
-												: faStar
-										}
-										onClick={() => addToFavourite(item)}
-									/>
 									<Image
 										onClick={() => getSingleRecipe(item.id)}
 										src={item.image}
 										rounded
 									/>
-									<h3
-										onClick={() => getSingleRecipe(item.id)}
-									>
-										{item.title}
+									<h3>
+										<span
+											onClick={() =>
+												getSingleRecipe(item.id)
+											}
+										>
+											{item.title}
+										</span>
+										<FontAwesomeIcon
+											className="favourite-star"
+											icon={
+												isCurrentFavourite(item.id)
+													? faStarFill
+													: faStar
+											}
+											onClick={() => addToFavourite(item)}
+										/>
 									</h3>
 								</Col>
 							))}

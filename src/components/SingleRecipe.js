@@ -18,7 +18,6 @@ import ApiClient from '../api/auth-service.js';
 
 export default function SingleRecipe(props) {
 	const [error, setError] = useState('');
-	const [recipe, setFavourites] = useState([]);
 
 	const [similarRecipes, setSimilarRecipes] = useState([]);
 
@@ -58,16 +57,24 @@ export default function SingleRecipe(props) {
 									className="searchItem"
 									key={index}
 								>
-									<FontAwesomeIcon
-										className="favourite-star"
-										icon={
-											props.favourite(item.id)
-												? faStarFill
-												: faStar
-										}
-										onClick={props.addToFavourite}
-									/>
-									<h3>{item.title}</h3>
+									<h3>
+										<span
+											onClick={() =>
+												props.showSingleRecipe(item.id)
+											}
+										>
+											{item.title}
+										</span>
+										<FontAwesomeIcon
+											className="favourite-star"
+											icon={
+												props.favourite(item.id)
+													? faStarFill
+													: faStar
+											}
+											onClick={props.addToFavourite}
+										/>
+									</h3>
 									<Image src={item.image} rounded />
 								</Col>
 								<Col
@@ -87,30 +94,13 @@ export default function SingleRecipe(props) {
 										</span>
 										{item.servings}{' '}
 									</p>
-								</Col>
-								<Col className="summary" className="text-left">
-									<div className="instructions">
-										<h4>Instructions: </h4>
-										<ul>
-											{item.instructions
-												.split('. ')
-												.map((item, index) => (
-													<li key={index}>{item}</li>
-												))}
-										</ul>
-									</div>
-								</Col>
-							</Row>
-						))}
-						<Row>
-							<Carousel>
-								{similarRecipes !== null &&
-									similarRecipes.length !== 0 && (
-										<>
-											{similarRecipes.map(
-												(item, index) => (
-													<Carousel.Item key={index}>
-														<Carousel.Caption>
+									<h4>Similar recipes: </h4>
+									{similarRecipes !== null &&
+										similarRecipes.length !== 0 && (
+											<>
+												{similarRecipes.map(
+													(item, index) => (
+														<div key={index}>
 															<h3
 																onClick={() =>
 																	props.showSingleRecipe(
@@ -136,14 +126,26 @@ export default function SingleRecipe(props) {
 																{item.servings}{' '}
 																mins
 															</p>
-														</Carousel.Caption>
-													</Carousel.Item>
-												),
-											)}
-										</>
-									)}
-							</Carousel>
-						</Row>
+														</div>
+													),
+												)}
+											</>
+										)}
+								</Col>
+								<Col className="summary" className="text-left">
+									<div className="instructions">
+										<h4>Instructions: </h4>
+										<ul>
+											{item.instructions
+												.split('. ')
+												.map((item, index) => (
+													<li key={index}>{item}</li>
+												))}
+										</ul>
+									</div>
+								</Col>
+							</Row>
+						))}
 					</>
 				)}
 			</Container>
