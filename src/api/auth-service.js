@@ -3,20 +3,38 @@ const axios = require('axios');
 const accessToken = process.env.REACT_APP_API_KEY;
 const API_URL = process.env.REACT_APP_API_URL;
 const config = {
-    headers: { 
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-    }
+	headers: {
+		'Content-Type': 'application/json',
+		Accept: 'application/json',
+	},
 };
 
-class Service{
-    searchRecipes(query){
-        return axios.get(API_URL + `recipes/complexSearch?query=${query}&apiKey=${accessToken}`, config);
-    }
-    autoCompleteSearch(query){
-        return axios.get(API_URL + `recipes/autocomplete?number=10&query=${query}&apiKey=${accessToken}`, config);
-    }
-
-    
+class ApiClient {
+	searchRecipes(query) {
+		return axios.get(
+			API_URL +
+				`recipes/complexSearch?query=${query}&apiKey=${accessToken}`,
+			config,
+		);
+	}
+	autoCompleteSearch(query) {
+		return axios.get(
+			API_URL +
+				`recipes/autocomplete?number=10&query=${query}&apiKey=${accessToken}`,
+			config,
+		);
+	}
+	getRecipeInformation(id) {
+		return axios.get(
+			API_URL + `recipes/${id}/information?&apiKey=${accessToken}`,
+			config,
+		);
+	}
+	getSimilarRecipes(id) {
+		return axios.get(
+			API_URL + `recipes/${id}/similar?&apiKey=${accessToken}`,
+			config,
+		);
+	}
 }
-export default new Service();
+export default new ApiClient();
