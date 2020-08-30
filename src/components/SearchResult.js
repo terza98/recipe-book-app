@@ -154,16 +154,12 @@ export default function SearchResult(props) {
 												}
 											/>
 										</h3>
-										{window.location.href.indexOf(
-											'favourites',
-										) > -1 && (
-											<p>
-												<span className="font-weight-bold">
-													Prep:{' '}
-												</span>
-												{item.readyInMinutes} mins
-											</p>
-										)}
+										<p>
+											<span className="font-weight-bold">
+												Prep:{' '}
+											</span>
+											{item.readyInMinutes} mins
+										</p>
 									</Col>
 								))}
 							</Row>

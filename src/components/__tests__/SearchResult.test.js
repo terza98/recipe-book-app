@@ -8,3 +8,9 @@ it('renders without crashing', () => {
 	const div = document.createElement('div');
 	ReactDOM.render(<SearchResult />, div);
 });
+
+it('matches snapshot', () => {
+	const { asFragment } = render(<SearchResult />);
+
+	expect(asFragment()).toMatchSnapshot();
+});

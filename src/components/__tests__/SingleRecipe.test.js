@@ -8,3 +8,9 @@ it('renders without crashing', () => {
 	const div = document.createElement('div');
 	ReactDOM.render(<SingleRecipe />, div);
 });
+
+it('matches snapshot', () => {
+	const { asFragment } = render(<SingleRecipe />);
+
+	expect(asFragment()).toMatchSnapshot();
+});
