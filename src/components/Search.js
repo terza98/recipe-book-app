@@ -5,6 +5,7 @@ import Alert from 'react-bootstrap/Alert';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 //api
 import ApiClient from '../api/auth-service.js';
@@ -45,7 +46,8 @@ export default function Search(props) {
 		changeQuery(title);
 		setPredictions([]);
 	};
-	const loadResults = () => {
+	const loadResults = e => {
+		e.preventDefault();
 		ApiClient.searchRecipes(query).then(
 			result => {
 				setRecipes(result.data.results);
@@ -76,32 +78,34 @@ export default function Search(props) {
 							</Alert>
 						)}
 
-						<div id="autocomplete-list">
-							<input
-								onChange={e => handleInputChange(e)}
-								value={query}
-								type="text"
-								placeholder="Type in your next meal..."
-								id="search"
-								name="search"
-							/>
-							<ListGroup>
-								{predictions !== undefined &&
-									predictions.map((item, index) => (
-										<ListGroup.Item
-											onClick={() =>
-												selectQuery(item.title)
-											}
-											key={index}
-										>
-											{item.title}
-										</ListGroup.Item>
-									))}
-							</ListGroup>
-						</div>
-						<Button id="search-btn" onClick={loadResults}>
-							Search
-						</Button>
+						<Form onSubmit={loadResults}>
+							<div id="autocomplete-list">
+								<input
+									onChange={e => handleInputChange(e)}
+									value={query}
+									type="text"
+									placeholder="Type in your next meal..."
+									id="search"
+									name="search"
+								/>
+								<ListGroup>
+									{predictions !== undefined &&
+										predictions.map((item, index) => (
+											<ListGroup.Item
+												onClick={() =>
+													selectQuery(item.title)
+												}
+												key={index}
+											>
+												{item.title}
+											</ListGroup.Item>
+										))}
+								</ListGroup>
+							</div>
+							<Button type="submit" id="search-btn">
+								Search
+							</Button>
+						</Form>
 					</Jumbotron>
 				) : (
 					<SearchResult query={query} recipes={recipeList} />

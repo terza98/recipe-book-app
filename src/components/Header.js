@@ -11,7 +11,7 @@ export default function Header(props) {
 	return (
 		<Router>
 			<Navbar id="navbar" bg="dark" variant="dark">
-				<Navbar.Brand href="/">{props.title}</Navbar.Brand>
+				<Navbar.Brand href="/search">{props.title}</Navbar.Brand>
 				<Navbar.Collapse id="responsive-navbar-nav">
 					<Nav className="ml-auto">
 						<Link to="/search">Search</Link>
