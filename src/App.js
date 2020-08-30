@@ -3,7 +3,7 @@ import './style.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
 import Alert from 'react-bootstrap/Alert';
-import { Router, Switch, Route, Link } from 'react-router-dom';
+import { Router, Switch, Route } from 'react-router-dom';
 import history from './history';
 
 //components
@@ -53,7 +53,10 @@ function App() {
 		ApiClient.searchRecipes(query).then(
 			result => {
 				setRecipes(result.data.results);
-				history.push('/search-results');
+				history.push({
+					pathname: '/search-results',
+					search: `?query=${query}`,
+				});
 			},
 			// Note: hanling errors here
 			error => {
@@ -82,7 +85,7 @@ function App() {
 							<Route
 								exact
 								path="/search"
-								component={() => (
+								render={() => (
 									<Search
 										predictions={predictions}
 										query={query}

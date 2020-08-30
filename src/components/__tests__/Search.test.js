@@ -10,19 +10,6 @@ it('renders without crashing', () => {
 	ReactDOM.render(<Search />, div);
 });
 
-describe('should submit the form', () => {
-	it('when hitting the Enter key', async () => {
-		const onSubmit = jest.fn();
-		render(<Search onSubmit={onSubmit} />);
-
-		const input = screen.getByRole('textbox');
-
-		await act(async () => userEvent.type(input, 'hello{enter}'));
-
-		expect(onSubmit).toHaveBeenCalledTimes(1);
-	});
-});
-
 it('matches snapshot', () => {
 	const { asFragment } = render(<Search />);
 
