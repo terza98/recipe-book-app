@@ -4,15 +4,12 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 
 //bootstrap components
-import ListGroup from 'react-bootstrap/ListGroup';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
 export default function Search(props) {
 	const [isLoaded, setIsLoaded] = useState(false);
-	const [value, setValue] = React.useState('');
-	const [inputValue, setInputValue] = React.useState('');
 
 	useEffect(() => {
 		setIsLoaded(true);

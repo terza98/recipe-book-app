@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
+import { Link } from 'react-router-dom';
 
 export default function Header(props) {
 	return (
@@ -8,8 +9,8 @@ export default function Header(props) {
 			<Navbar.Brand href="/search">{props.title}</Navbar.Brand>
 			<Navbar.Collapse id="responsive-navbar-nav">
 				<Nav className="ml-auto">
-					<a href="/search">Search</a>
-					<a href="/favourites">Favourites</a>
+					<Link to="/search">Search</Link>
+					<Link to="/favourites">Favourites</Link>
 				</Nav>
 			</Navbar.Collapse>
 		</Navbar>
