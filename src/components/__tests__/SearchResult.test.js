@@ -11,6 +11,5 @@ it('renders without crashing', () => {
 
 it('matches snapshot', () => {
 	const { asFragment } = render(<SearchResult />);
-
 	expect(asFragment()).toMatchSnapshot();
 });

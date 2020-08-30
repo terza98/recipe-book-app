@@ -40,18 +40,18 @@ function App() {
 	const handleInputChange = e => {
 		changeQuery(e.target.value);
 
-		//uncoment when pushing live
-		// ApiClient.autoCompleteSearch(e.target.value)
-		// 	.then(result => {
-		// 		setPredictions(result.data);
-		// 	})
-		// 	// Note: hanling errors here
-		// 	.catch(error => {
-		// 		setError(error.message);
-		// 	});
+		ApiClient.autoCompleteSearch(e.target.value)
+			.then(result => {
+				setPredictions(result.data);
+			})
+			// Note: hanling errors here
+			.catch(error => {
+				setError(error.message);
+			});
 	};
 
 	const selectQuery = title => {
+		console.log(title);
 		changeQuery(title);
 		setPredictions([]);
 	};
@@ -61,7 +61,6 @@ function App() {
 		ApiClient.searchRecipes(query)
 			.then(result => {
 				setRecipes(result.data.results);
-				console.log(result.data);
 				history.push({
 					pathname: '/search-results',
 					search: `?query=${query}`,

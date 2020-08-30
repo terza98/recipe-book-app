@@ -5,7 +5,6 @@ import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Image from 'react-bootstrap/Image';
-import Alert from 'react-bootstrap/Alert';
 import Carousel from 'react-bootstrap/Carousel';
 
 //fontawesome

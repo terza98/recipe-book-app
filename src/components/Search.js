@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import TextField from '@material-ui/core/TextField';
+
 //bootstrap components
 import ListGroup from 'react-bootstrap/ListGroup';
 import Jumbotron from 'react-bootstrap/Jumbotron';
@@ -8,6 +11,8 @@ import Form from 'react-bootstrap/Form';
 
 export default function Search(props) {
 	const [isLoaded, setIsLoaded] = useState(false);
+	const [value, setValue] = React.useState('');
+	const [inputValue, setInputValue] = React.useState('');
 
 	useEffect(() => {
 		setIsLoaded(true);
@@ -20,32 +25,32 @@ export default function Search(props) {
 			<>
 				<Jumbotron className="banner">
 					<h1>Welcome to my Recipes app!</h1>
-					<p>Type your search inquiry below</p>
 					<Form data-testid="form" onSubmit={props.onSubmit}>
-						<div id="autocomplete-list">
-							<input
-								onChange={props.handleInputChange}
-								value={props.query}
-								type="text"
-								data-testid="input"
-								placeholder="Type in your next meal..."
-								id="search"
-								name="search"
-							/>
-							<ListGroup>
-								{props.predictions !== undefined &&
-									props.predictions.map((item, index) => (
-										<ListGroup.Item
-											onClick={() =>
-												props.selectQuery(item.title)
-											}
-											key={index}
-										>
-											{item.title}
-										</ListGroup.Item>
-									))}
-							</ListGroup>
-						</div>
+						<Autocomplete
+							id="controllable-states-demo"
+							options={props.predictions}
+							getOptionLabel={option => option.title}
+							onChange={() =>
+								setTimeout(function () {
+									props.selectQuery(
+										document.getElementById(
+											'controllable-states-demo',
+										).value,
+									);
+								}, 200)
+							}
+							style={{ width: 300 }}
+							renderInput={params => (
+								<TextField
+									{...params}
+									placeholder="Type your next meal..."
+									variant="outlined"
+									id="query"
+									value={props.query}
+									onChange={props.handleInputChange}
+								/>
+							)}
+						/>
 						<Button
 							data-testid="button"
 							type="submit"
