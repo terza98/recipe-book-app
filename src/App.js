@@ -11,65 +11,19 @@ import Header from './components/Header.js';
 import Search from './components/Search.js';
 import SearchResult from './components/SearchResult.js';
 import SingleRecipe from './components/SingleRecipe.js';
-
-//api
-import ApiClient from './api/auth-service.js';
+import RecipesList from './components/RecipesList.js';
 
 function App() {
-	const [recipeList, setRecipes] = useState([]);
-
-	const [query, changeQuery] = useState('');
-	//autocomplete
-	const [predictions, setPredictions] = useState([]);
-
 	//general state
 	const [error, setError] = useState('');
 	const [isLoaded, setIsLoaded] = useState(false);
 
 	const [favouriteList, setFavourites] = useState([]);
 
-	const [singleRecipe, setSingleRecipe] = useState([]);
-
-	const [similarRecipes, setSimilarRecipes] = useState([]);
-
 	useEffect(() => {
 		setIsLoaded(true);
 		setFavourites(JSON.parse(localStorage.getItem('favourites')));
 	}, []);
-
-	const handleInputChange = e => {
-		changeQuery(e.target.value);
-
-		ApiClient.autoCompleteSearch(e.target.value)
-			.then(result => {
-				setPredictions(result.data);
-			})
-			// Note: hanling errors here
-			.catch(error => {
-				setError(error.message);
-			});
-	};
-
-	const selectQuery = title => {
-		changeQuery(title);
-		setPredictions([]);
-	};
-
-	const loadResults = e => {
-		e.preventDefault();
-		ApiClient.searchRecipes(query)
-			.then(result => {
-				setRecipes(result.data.results);
-				history.push({
-					pathname: '/search-results',
-					search: `?query=${query}`,
-				});
-			})
-			// Note: hanling errors here
-			.catch(error => {
-				setError(error.message);
-			});
-	};
 
 	const addToFavourite = item => {
 		let a;
@@ -108,27 +62,8 @@ function App() {
 		return isTrue;
 	};
 
-	const getSingleRecipe = id => {
-		ApiClient.getRecipeInformation(id)
-			.then(result => {
-				setSingleRecipe([result.data]);
-				history.push({
-					pathname: '/single-recipe',
-					search: `?name=${result.data.title}`,
-				});
-			})
-			// Note: hanling errors here
-			.catch(error => {
-				setError(error.message);
-			});
-		ApiClient.getSimilarRecipes(id)
-			.then(result => {
-				setSimilarRecipes(result.data);
-			})
-			// Note: hanling errors here
-			.catch(error => {
-				setError(error.message);
-			});
+	const handleSubmit = query => {
+		history.push(`/search-results?query=${query}`);
 	};
 
 	if (!isLoaded) {
@@ -153,65 +88,42 @@ function App() {
 								exact
 								path="/"
 								render={() => (
-									<Search
-										predictions={predictions}
-										query={query}
-										handleInputChange={e =>
-											handleInputChange(e)
-										}
-										selectQuery={selectQuery}
-										onSubmit={loadResults}
-									/>
+									<Search onSubmit={handleSubmit} />
 								)}
 							/>
 							<Route
 								exact
 								path="/search"
 								render={() => (
-									<Search
-										predictions={predictions}
-										query={query}
-										handleInputChange={e =>
-											handleInputChange(e)
-										}
-										selectQuery={selectQuery}
-										onSubmit={loadResults}
-									/>
+									<Search onSubmit={handleSubmit} />
 								)}
 							/>
 							<Route
 								path="/search-results"
 								render={() => (
 									<SearchResult
-										query={query}
-										recipes={recipeList}
 										isCurrentFavourite={isCurrentFavourite}
 										addToFavourite={addToFavourite}
-										getSingleRecipe={getSingleRecipe}
 									/>
 								)}
 							/>
 							<Route
-								path="/single-recipe"
+								path="/single-recipe/:id"
 								component={() => (
 									<SingleRecipe
 										isCurrentFavourite={isCurrentFavourite}
-										recipe={singleRecipe}
 										addToFavourite={addToFavourite}
-										showSingleRecipe={getSingleRecipe}
-										similarRecipes={similarRecipes}
 									/>
 								)}
 							/>
 
 							<Route path="/favourites">
-								<SearchResult
+								<RecipesList
 									recipes={JSON.parse(
 										localStorage.getItem('favourites'),
 									)}
 									isCurrentFavourite={isCurrentFavourite}
 									addToFavourite={addToFavourite}
-									getSingleRecipe={getSingleRecipe}
 								/>
 							</Route>
 						</Switch>

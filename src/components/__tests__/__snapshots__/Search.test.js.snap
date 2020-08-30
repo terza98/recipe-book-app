@@ -6,7 +6,7 @@ exports[`matches snapshot 1`] = `
     class="banner jumbotron"
   >
     <h1>
-      Welcome to my Recipes app!
+      Welcome to my Recipe book app!
     </h1>
     <form
       class=""
@@ -21,14 +21,6 @@ exports[`matches snapshot 1`] = `
         <div
           class="MuiFormControl-root MuiTextField-root MuiFormControl-fullWidth"
         >
-          <label
-            class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined"
-            data-shrink="false"
-            for="controllable-states-demo"
-            id="controllable-states-demo-label"
-          >
-            Type your inquiry
-          </label>
           <div
             class="MuiInputBase-root MuiOutlinedInput-root MuiAutocomplete-inputRoot MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd MuiOutlinedInput-adornedEnd"
           >
@@ -101,12 +93,14 @@ exports[`matches snapshot 1`] = `
             <fieldset
               aria-hidden="true"
               class="PrivateNotchedOutline-root-1 MuiOutlinedInput-notchedOutline"
+              style="padding-left: 8px;"
             >
               <legend
-                class="PrivateNotchedOutline-legendLabelled-3"
+                class="PrivateNotchedOutline-legend-2"
+                style="width: 0.01px;"
               >
                 <span>
-                  Type your inquiry
+                  ​
                 </span>
               </legend>
             </fieldset>

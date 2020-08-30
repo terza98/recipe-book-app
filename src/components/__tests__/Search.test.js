@@ -19,8 +19,7 @@ afterEach(() => {
 });
 
 it('renders without crashing', () => {
-	const div = document.createElement('div');
-	ReactDOM.render(<Search />, div);
+	ReactDOM.render(<Search />, container);
 });
 
 it('matches snapshot', () => {
