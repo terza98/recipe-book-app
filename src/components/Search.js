@@ -43,7 +43,6 @@ export default function Search(props) {
 									{...params}
 									placeholder="Type your next meal..."
 									variant="outlined"
-									label="Type your inquiry"
 									id="query"
 									value={props.query}
 									onChange={props.handleInputChange}
