@@ -53,7 +53,6 @@ export default function SearchResult(props) {
 			for (let i = 0; i < a.length; i++) {
 				if (a[i].id === item.id) a.splice(i, 1);
 			}
-			console.log(a);
 			// Re-serialize the array back into a string and store it in localStorage
 			localStorage.setItem('favourites', JSON.stringify(a));
 			setFavourites(a);

@@ -48,7 +48,6 @@ export default function Search(props) {
 	const loadResults = () => {
 		ApiClient.searchRecipes(query).then(
 			result => {
-				console.log(result.data.results);
 				setRecipes(result.data.results);
 				isRecipes(true);
 			},

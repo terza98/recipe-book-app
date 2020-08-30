@@ -28,7 +28,6 @@ export default function SingleRecipe(props) {
 		return (
 			<>
 				<Container className="text-center">
-					<h1 style={{ marginBottom: '2%' }}></h1>
 					{error && (
 						<Alert
 							variant="danger"
@@ -112,10 +111,7 @@ export default function SingleRecipe(props) {
 											{item.healthScore}{' '}
 										</p>
 									</Col>
-									<Col
-										className="summary"
-										className="text-left"
-									>
+									<Col className="text-left summary">
 										<div className="ingredients">
 											<h4>Ingredients: </h4>
 											<ul>
