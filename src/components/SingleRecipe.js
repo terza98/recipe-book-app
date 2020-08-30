@@ -20,6 +20,7 @@ export default function SingleRecipe(props) {
 
 	useEffect(() => {
 		setIsLoaded(true);
+		window.scrollTo(0, 0);
 	}, []);
 
 	if (!isLoaded) {

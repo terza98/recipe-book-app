@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="banner jumbotron"
+  >
+    <h1>
+      Welcome to my Recipes app!
+    </h1>
+    <p>
+      Type your search inquiry below
+    </p>
+    <form
+      class=""
+      data-testid="form"
+    >
+      <div
+        id="autocomplete-list"
+      >
+        <input
+          data-testid="input"
+          id="search"
+          name="search"
+          placeholder="Type in your next meal..."
+          type="text"
+          value=""
+        />
+        <div
+          class="list-group"
+        />
+      </div>
+      <button
+        class="btn btn-primary"
+        data-testid="button"
+        id="search-btn"
+        type="submit"
+      >
+        Search
+      </button>
+    </form>
+  </div>
+</DocumentFragment>
+`;
