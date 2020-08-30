@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
+// https://react-bootstrap.github.io/getting-started/introduction/#importing-components
 //bootstrap components
 import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
