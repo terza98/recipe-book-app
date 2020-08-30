@@ -25,6 +25,8 @@ export default function SearchResult(props) {
 
 	const [singleRecipe, setSingleRecipe] = useState([]);
 
+	const [similarRecipes, setSimilarRecipes] = useState([]);
+
 	useEffect(() => {
 		setFavourites(JSON.parse(localStorage.getItem('favourites')));
 	}, []);
@@ -75,6 +77,14 @@ export default function SearchResult(props) {
 			.catch(error => {
 				setError(error.message);
 			});
+		ApiClient.getSimilarRecipes(id)
+			.then(result => {
+				setSimilarRecipes(result.data);
+			})
+			// Note: hanling errors here
+			.catch(error => {
+				setError(error.message);
+			});
 	};
 	return (
 		<>
@@ -84,6 +94,7 @@ export default function SearchResult(props) {
 					recipe={singleRecipe}
 					addToFavourite={() => addToFavourite(singleRecipe)}
 					showSingleRecipe={getSingleRecipe}
+					similarRecipes={similarRecipes}
 				/>
 			) : (
 				<Container className="text-center">

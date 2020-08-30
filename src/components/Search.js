@@ -56,7 +56,7 @@ export default function Search(props) {
 	return (
 		<>
 			{!showRecipes ? (
-				<Jumbotron>
+				<Jumbotron className="banner">
 					<h1>Welcome to my Recipes app!</h1>
 					<p>Type your search inquiry below</p>
 					{error && (
