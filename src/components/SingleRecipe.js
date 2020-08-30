@@ -50,11 +50,15 @@ export default function SingleRecipe(props) {
 											<FontAwesomeIcon
 												className="favourite-star"
 												icon={
-													props.favourite(item.id)
+													props.isCurrentFavourite(
+														item.id,
+													)
 														? faStarFill
 														: faStar
 												}
-												onClick={props.addToFavourite}
+												onClick={() =>
+													props.addToFavourite(item)
+												}
 											/>
 										</h3>
 										<Image src={item.image} rounded />

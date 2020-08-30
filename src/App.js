@@ -196,13 +196,9 @@ function App() {
 								path="/single-recipe"
 								component={() => (
 									<SingleRecipe
-										favourite={() =>
-											isCurrentFavourite(singleRecipe.id)
-										}
+										isCurrentFavourite={isCurrentFavourite}
 										recipe={singleRecipe}
-										addToFavourite={() =>
-											addToFavourite(singleRecipe)
-										}
+										addToFavourite={addToFavourite}
 										showSingleRecipe={getSingleRecipe}
 										similarRecipes={similarRecipes}
 									/>

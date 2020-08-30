@@ -95,6 +95,7 @@ h1, h3, p, h6, span, h4, .instructions, li{color:#fff;}
 .MuiFormControl-root, .MuiAutocomplete-inputRoot[class*="MuiOutlinedInput-root"]{
   height: 100%;
 }
+.MuiIconButton-label{color:black;}
 
 @media(min-width: 769px){
   .recipe-info-section{padding-top:5%;}
