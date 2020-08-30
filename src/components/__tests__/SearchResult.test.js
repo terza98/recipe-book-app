@@ -1,15 +1,24 @@
 import React from 'react';
 import SearchResult from '../SearchResult.js';
 import ReactDOM from 'react-dom';
-import { render } from '@testing-library/react';
+import { unmountComponentAtNode } from 'react-dom';
 
-//test if the app doesn't crash first
-it('renders without crashing', () => {
-	const div = document.createElement('div');
-	ReactDOM.render(<SearchResult />, div);
+let container = null;
+beforeEach(() => {
+	// setup a DOM element as a render target
+	container = document.createElement('div');
+	document.body.appendChild(container);
 });
 
-it('matches snapshot', () => {
-	const { asFragment } = render(<SearchResult />);
-	expect(asFragment()).toMatchSnapshot();
+afterEach(() => {
+	// cleanup on exiting
+	unmountComponentAtNode(container);
+	container.remove();
+	container = null;
+});
+
+it('renders without crashing', () => {
+	const div = document.createElement('div');
+
+	ReactDOM.render(<SearchResult />, div);
 });
