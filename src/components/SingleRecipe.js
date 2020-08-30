@@ -121,11 +121,15 @@ export default function SingleRecipe(props) {
 									<div className="instructions">
 										<h4>Instructions: </h4>
 										<ul>
-											{item.instructions
-												.split('. ')
-												.map((item, index) => (
-													<li key={index}>{item}</li>
-												))}
+											{item.instructions !== null
+												? item.instructions
+														.split('. ')
+														.map((item, index) => (
+															<li key={index}>
+																{item}
+															</li>
+														))
+												: 'No instructions provided.'}
 										</ul>
 									</div>
 									<h4>Similar recipes: </h4>
