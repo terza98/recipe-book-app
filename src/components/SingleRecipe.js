@@ -95,7 +95,7 @@ export default function SingleRecipe(props) {
 										</p>
 										<p>
 											<span className="font-weight-bold">
-												Vegetarian:{' '}
+												Gluten-Free:{' '}
 											</span>
 											{item.glutenFree ? 'Yes' : 'No'}{' '}
 										</p>
