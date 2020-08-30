@@ -15,7 +15,6 @@ import { faStar as faStarFill } from '@fortawesome/free-solid-svg-icons';
 
 export default function SingleRecipe(props) {
 	//general state
-	const [error, setError] = useState('');
 	const [isLoaded, setIsLoaded] = useState(false);
 
 	useEffect(() => {
@@ -29,15 +28,6 @@ export default function SingleRecipe(props) {
 		return (
 			<>
 				<Container className="text-center">
-					{error && (
-						<Alert
-							variant="danger"
-							onClose={() => setError('')}
-							dismissible
-						>
-							{typeof error !== 'object' ? error : ''}
-						</Alert>
-					)}
 					{props.recipe !== null && props.recipe.length !== 0 && (
 						<>
 							{props.recipe.map((item, index) => (
