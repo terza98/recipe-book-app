@@ -51,7 +51,6 @@ function App() {
 	};
 
 	const selectQuery = title => {
-		console.log(title);
 		changeQuery(title);
 		setPredictions([]);
 	};
