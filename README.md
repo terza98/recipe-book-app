@@ -3,7 +3,7 @@
 
 In the project directory, you can run:
 
-### `docker-comopose up`
+### `docker-compose up`
 
 This will build the full app. You need to have docker installed.<br />
 Open [http://localhost:8080](http://localhost:8080) to view it in the browser.
