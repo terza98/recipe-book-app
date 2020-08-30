@@ -99,7 +99,9 @@ export default function SearchResult(props) {
 			) : (
 				<Container className="text-center">
 					<h1 style={{ marginBottom: '2%' }}>
-						Search results for query: {props.query}{' '}
+						{window.location.href.indexOf('favourites') > -1
+							? 'Favourites'
+							: `Search results for query: ${props.query}`}
 					</h1>
 					{error && (
 						<Alert
