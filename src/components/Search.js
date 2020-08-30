@@ -22,7 +22,7 @@ export default function Search(props) {
 		return (
 			<>
 				<Jumbotron className="banner">
-					<h1>Welcome to my Recipes app!</h1>
+					<h1>Welcome to my Recipe book app!</h1>
 					<Form data-testid="form" onSubmit={props.onSubmit}>
 						<Autocomplete
 							id="controllable-states-demo"
