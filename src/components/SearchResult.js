@@ -19,15 +19,18 @@ import SingleRecipe from './SingleRecipe.js';
 import ApiClient from '../api/auth-service.js';
 
 export default function SearchResult(props) {
-	const [error, setError] = useState('');
-
 	const [favouriteList, setFavourites] = useState([]);
 
 	const [singleRecipe, setSingleRecipe] = useState([]);
 
 	const [similarRecipes, setSimilarRecipes] = useState([]);
 
+	//general state
+	const [error, setError] = useState('');
+	const [isLoaded, setIsLoaded] = useState(false);
+
 	useEffect(() => {
+		setIsLoaded(true);
 		setFavourites(JSON.parse(localStorage.getItem('favourites')));
 	}, []);
 
@@ -86,70 +89,77 @@ export default function SearchResult(props) {
 				setError(error.message);
 			});
 	};
-	return (
-		<>
-			{singleRecipe !== null && singleRecipe.length !== 0 ? (
-				<SingleRecipe
-					favourite={() => isCurrentFavourite(singleRecipe.id)}
-					recipe={singleRecipe}
-					addToFavourite={() => addToFavourite(singleRecipe)}
-					showSingleRecipe={getSingleRecipe}
-					similarRecipes={similarRecipes}
-				/>
-			) : (
-				<Container className="text-center">
-					<h1 style={{ marginBottom: '2%' }}>
-						{window.location.href.indexOf('favourites') > -1
-							? 'Favourites'
-							: `Search results for query: ${props.query}`}
-					</h1>
-					{error && (
-						<Alert
-							variant="danger"
-							onClose={() => setError('')}
-							dismissible
-						>
-							{typeof error !== 'object' ? error : ''}
-						</Alert>
-					)}
-					{props.recipes !== null && (
-						<Row>
-							{props.recipes.map((item, index) => (
-								<Col
-									className="searchItem"
-									key={index}
-									xs={12}
-									md={4}
-								>
-									<Image
-										onClick={() => getSingleRecipe(item.id)}
-										src={item.image}
-										rounded
-									/>
-									<h3>
-										<span
+	if (!isLoaded) {
+		return 'Loading...';
+	} else
+		return (
+			<>
+				{singleRecipe !== null && singleRecipe.length !== 0 ? (
+					<SingleRecipe
+						favourite={() => isCurrentFavourite(singleRecipe.id)}
+						recipe={singleRecipe}
+						addToFavourite={() => addToFavourite(singleRecipe)}
+						showSingleRecipe={getSingleRecipe}
+						similarRecipes={similarRecipes}
+					/>
+				) : (
+					<Container className="text-center">
+						<h1 style={{ marginBottom: '2%' }}>
+							{window.location.href.indexOf('favourites') > -1
+								? 'Favourites'
+								: `Search results for query: ${props.query}`}
+						</h1>
+						{error && (
+							<Alert
+								variant="danger"
+								onClose={() => setError('')}
+								dismissible
+							>
+								{typeof error !== 'object' ? error : ''}
+							</Alert>
+						)}
+						{props.recipes !== null && (
+							<Row>
+								{props.recipes.map((item, index) => (
+									<Col
+										className="searchItem"
+										key={index}
+										xs={12}
+										md={4}
+									>
+										<Image
 											onClick={() =>
 												getSingleRecipe(item.id)
 											}
-										>
-											{item.title}
-										</span>
-										<FontAwesomeIcon
-											className="favourite-star"
-											icon={
-												isCurrentFavourite(item.id)
-													? faStarFill
-													: faStar
-											}
-											onClick={() => addToFavourite(item)}
+											src={item.image}
+											rounded
 										/>
-									</h3>
-								</Col>
-							))}
-						</Row>
-					)}
-				</Container>
-			)}
-		</>
-	);
+										<h3>
+											<span
+												onClick={() =>
+													getSingleRecipe(item.id)
+												}
+											>
+												{item.title}
+											</span>
+											<FontAwesomeIcon
+												className="favourite-star"
+												icon={
+													isCurrentFavourite(item.id)
+														? faStarFill
+														: faStar
+												}
+												onClick={() =>
+													addToFavourite(item)
+												}
+											/>
+										</h3>
+									</Col>
+								))}
+							</Row>
+						)}
+					</Container>
+				)}
+			</>
+		);
 }

@@ -14,14 +14,19 @@ import SearchResult from './SearchResult.js';
 
 export default function Search(props) {
 	const [query, changeQuery] = useState('');
-	const [error, setError] = useState('');
-
+	//autocomplete
 	const [predictions, setPredictions] = useState([]);
 
 	const [recipeList, setRecipes] = useState([]);
 	const [showRecipes, isRecipes] = useState(false);
 
-	useEffect(() => {}, []);
+	//general state
+	const [error, setError] = useState('');
+	const [isLoaded, setIsLoaded] = useState(false);
+
+	useEffect(() => {
+		setIsLoaded(true);
+	}, []);
 
 	const handleInputChange = e => {
 		changeQuery(e.target.value);
@@ -53,50 +58,55 @@ export default function Search(props) {
 			},
 		);
 	};
-	return (
-		<>
-			{!showRecipes ? (
-				<Jumbotron className="banner">
-					<h1>Welcome to my Recipes app!</h1>
-					<p>Type your search inquiry below</p>
-					{error && (
-						<Alert
-							variant="danger"
-							onClose={() => setError('')}
-							dismissible
-						>
-							{typeof error !== 'object' ? error : ''}
-						</Alert>
-					)}
+	if (!isLoaded) {
+		return 'Loading...';
+	} else
+		return (
+			<>
+				{!showRecipes ? (
+					<Jumbotron className="banner">
+						<h1>Welcome to my Recipes app!</h1>
+						<p>Type your search inquiry below</p>
+						{error && (
+							<Alert
+								variant="danger"
+								onClose={() => setError('')}
+								dismissible
+							>
+								{typeof error !== 'object' ? error : ''}
+							</Alert>
+						)}
 
-					<div id="autocomplete-list">
-						<input
-							onChange={e => handleInputChange(e)}
-							value={query}
-							type="text"
-							placeholder="Type in your next meal..."
-							id="search"
-							name="search"
-						/>
-						<ListGroup>
-							{predictions !== undefined &&
-								predictions.map((item, index) => (
-									<ListGroup.Item
-										onClick={() => selectQuery(item.title)}
-										key={index}
-									>
-										{item.title}
-									</ListGroup.Item>
-								))}
-						</ListGroup>
-					</div>
-					<Button id="search-btn" onClick={loadResults}>
-						Search
-					</Button>
-				</Jumbotron>
-			) : (
-				<SearchResult query={query} recipes={recipeList} />
-			)}
-		</>
-	);
+						<div id="autocomplete-list">
+							<input
+								onChange={e => handleInputChange(e)}
+								value={query}
+								type="text"
+								placeholder="Type in your next meal..."
+								id="search"
+								name="search"
+							/>
+							<ListGroup>
+								{predictions !== undefined &&
+									predictions.map((item, index) => (
+										<ListGroup.Item
+											onClick={() =>
+												selectQuery(item.title)
+											}
+											key={index}
+										>
+											{item.title}
+										</ListGroup.Item>
+									))}
+							</ListGroup>
+						</div>
+						<Button id="search-btn" onClick={loadResults}>
+							Search
+						</Button>
+					</Jumbotron>
+				) : (
+					<SearchResult query={query} recipes={recipeList} />
+				)}
+			</>
+		);
 }
