@@ -13,10 +13,16 @@ class ApiClient {
 	searchRecipes(query) {
 		return axios.get(
 			API_URL +
-				`recipes/complexSearch?query=${query}&apiKey=${accessToken}`,
+				`recipes/complexSearch?query=${query}&addRecipeInformation=true&apiKey=${accessToken}`,
 			config,
 		);
 	}
+	// searchRecipesForPrepTime(query) {
+	// 	return axios.get(
+	// 		API_URL + `recipes/search?query=${query}&apiKey=${accessToken}`,
+	// 		config,
+	// 	);
+	// }
 	autoCompleteSearch(query) {
 		return axios.get(
 			API_URL +

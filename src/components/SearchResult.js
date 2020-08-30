@@ -61,12 +61,13 @@ export default function SearchResult(props) {
 
 	const isCurrentFavourite = id => {
 		let isTrue = false;
-		for (let i = 0; i < favouriteList.length; i++) {
-			if (favouriteList[i].id === id) {
-				isTrue = true;
-				break;
+		if (favouriteList !== null)
+			for (let i = 0; i < favouriteList.length; i++) {
+				if (favouriteList[i].id === id) {
+					isTrue = true;
+					break;
+				}
 			}
-		}
 		return isTrue;
 	};
 
@@ -153,6 +154,16 @@ export default function SearchResult(props) {
 												}
 											/>
 										</h3>
+										{window.location.href.indexOf(
+											'favourites',
+										) > -1 && (
+											<p>
+												<span className="font-weight-bold">
+													Prep:{' '}
+												</span>
+												{item.readyInMinutes} mins
+											</p>
+										)}
 									</Col>
 								))}
 							</Row>

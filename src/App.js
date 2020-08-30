@@ -32,7 +32,7 @@ function App() {
 	const handleInputChange = e => {
 		changeQuery(e.target.value);
 
-		//uncoment when start giving solution
+		//uncoment when pushing live
 		// ApiClient.autoCompleteSearch(e.target.value)
 		// 	.then(result => {
 		// 		setPredictions(result.data);
@@ -50,19 +50,19 @@ function App() {
 
 	const loadResults = e => {
 		e.preventDefault();
-		ApiClient.searchRecipes(query).then(
-			result => {
+		ApiClient.searchRecipes(query)
+			.then(result => {
 				setRecipes(result.data.results);
+				console.log(result.data);
 				history.push({
 					pathname: '/search-results',
 					search: `?query=${query}`,
 				});
-			},
+			})
 			// Note: hanling errors here
-			error => {
+			.catch(error => {
 				setError(error.message);
-			},
-		);
+			});
 	};
 	if (!isLoaded) {
 		return 'Loading...';
